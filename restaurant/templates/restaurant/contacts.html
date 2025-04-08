@@ -1,0 +1,45 @@
+{% extends "restaurant/base.html" %}
+
+{% block title %}Контакты{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm border-0 rounded-4 p-4">
+        <h2 class="text-center text-primary mb-4">Свяжитесь с нами</h2>
+
+        <ul class="list-unstyled mb-4">
+          <li><strong>📍 Адрес:</strong> г. Примерск, ул. Вкусная, 12</li>
+          <li><strong>📞 Телефон:</strong> +48 (900) 123-45-67</li>
+          <li><strong>📧 Email:</strong> info@restaurant.ru</li>
+          <li><strong>🕒 Время работы:</strong> Пн-Вс: 10:00 - 23:00</li>
+        </ul>
+
+        <!-- Форма обратной связи (по желанию) -->
+        <form method="post" action="">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="name" class="form-label">Ваше имя</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Ваш Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="message" class="form-label">Сообщение</label>
+            <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary px-4 py-2">Отправить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
