@@ -1,76 +1,168 @@
+{% extends "restaurant/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Меню</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/cerulean/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <header class="bg-primary p-3">
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container">
-                <a class="navbar-brand" href="{% url 'home' %}">Ресторан</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Главная</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'gallery' %}">Галерея</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'contacts' %}">Контакты</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'submit_review' %}">Оставить отзыв</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
 
-    <main class="container mt-5">
-        <h1 class="text-center">Наше меню</h1>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col" >
-                <div class="card h-100">
-                    <img src="{% static 'image/3.jpg' %}" class="card-img-top" alt="Блюдо 1">
-                    <div class="card-body">
-                        <h3 class="card-title">Блюдо 1</h3>
-                        <p class="card-text">Описание блюда</p>
-                        <span class="fw-bold">Цена: 40zł</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="{% static 'image/4.jpg' %}" class="card-img-top" alt="Блюдо 2">
-                    <div class="card-body">
-                        <h3 class="card-title">Блюдо 2</h3>
-                        <p class="card-text">Описание блюда</p>
-                        <span class="fw-bold">Цена: 60zł</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100">
-                    <img src="{% static 'image/5.jpg' %}" class="card-img-top" alt="Блюдо 3">
-                    <div class="card-body">
-                        <h3 class="card-title">Блюдо 3</h3>
-                        <p class="card-text">Описание блюда</p>
-                        <span class="fw-bold">Цена: 50zł</span>
-                    </div>
-                </div>
-            </div>
+{% block title %}Меню{% endblock %}
+
+{% block content %}
+<style>
+  body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Helvetica Neue', sans-serif;
+  }
+
+  .menu-section-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color:rgb(255, 255, 255);
+      margin: 40px 0 20px;
+      text-align: center;
+  }
+
+  .menu-item {
+      background-color: #111;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+      color: #fff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  }
+
+  .menu-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  }
+
+  .menu-item img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+  }
+
+  .menu-item h5 {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+      color:rgb(255, 255, 255);
+  }
+
+  .menu-item p {
+      margin-bottom: 8px;
+      font-size: 1rem;
+  }
+
+  .menu-item .price {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color:rgb(255, 255, 255);
+  }
+
+  .category-nav {
+      margin-top: 30px;
+  }
+
+  .category-nav a {
+      color: rgb(255, 255, 255);
+      display: block;
+      margin: 10px 0;
+      text-decoration: none;
+      font-size: 1.1rem;
+      position: relative;
+      transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .category-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0%;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.3s ease;
+  }
+
+  .category-nav a:hover {
+      color: #ffffff;
+      transform: scale(1.05);
+  }
+
+  .category-nav a:hover::after {
+      width: 40%;
+  }
+
+  .search-box {
+      margin-bottom: 30px;
+  }
+
+  input[type="text"] {
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #333;
+  }
+</style>
+
+<div class="container mt-5">
+    <h1 class="text-center text-primary mb-4">Меню</h1>
+
+    <!-- Поиск -->
+    <div class="row justify-content-center">
+        <div class="col-md-6 search-box">
+            <input type="text" class="form-control" placeholder="Поиск блюд...">
         </div>
-    </main>
+    </div>
 
-    <footer class="bg-dark text-white text-center p-3 mt-5">
-        <p>© 2025 Ресторан. Все права защищены.</p>
-    </footer>
+    <div class="row">
+        <!-- Навигация по категориям -->
+        <div class="col-md-3 category-nav">
+            <a href="#first">Первые блюда</a>
+            <a href="#second">Вторые блюда</a>
+            <a href="#dessert">Десерты</a>
+            <a href="#cocktail">Коктейли</a>
+        </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+        <!-- Список блюд -->
+        <div class="col-md-9">
+            <h2 id="first" class="menu-section-title">Первые блюда</h2>
+            {% for dish in first_dishes %}
+            <div class="menu-item">
+                <img src="{{ dish.image.url }}" alt="{{ dish.name }}">
+                <h5>{{ dish.name }}</h5>
+                <p>{{ dish.description }}</p>
+                <p class="price">{{ dish.price }} ₽</p>
+            </div>
+            {% endfor %}
+
+            <h2 id="second" class="menu-section-title">Вторые блюда</h2>
+            {% for dish in second_dishes %}
+            <div class="menu-item">
+                <img src="{{ dish.image.url }}" alt="{{ dish.name }}">
+                <h5>{{ dish.name }}</h5>
+                <p>{{ dish.description }}</p>
+                <p class="price">{{ dish.price }} ₽</p>
+            </div>
+            {% endfor %}
+
+            <h2 id="dessert" class="menu-section-title">Десерты</h2>
+            {% for dish in desserts %}
+            <div class="menu-item">
+                <img src="{{ dish.image.url }}" alt="{{ dish.name }}">
+                <h5>{{ dish.name }}</h5>
+                <p>{{ dish.description }}</p>
+                <p class="price">{{ dish.price }} ₽</p>
+            </div>
+            {% endfor %}
+
+            <h2 id="cocktail" class="menu-section-title">Коктейли</h2>
+            {% for dish in cocktails %}
+            <div class="menu-item">
+                <img src="{{ dish.image.url }}" alt="{{ dish.name }}">
+                <h5>{{ dish.name }}</h5>
+                <p>{{ dish.description }}</p>
+                <p class="price">{{ dish.price }} ₽</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

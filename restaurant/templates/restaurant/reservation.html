@@ -3,11 +3,32 @@
 {% block title %}Бронирование столика{% endblock %}
 
 {% block content %}
+<style>
+    .card {
+        background-color: #1a1a1a; /* Тёмный фон формы */
+        color: #fff;
+    }
+    .form-control {
+        background-color: #2c2c2c;
+        color: #fff;
+        border: 1px solid #444;
+    }
+    .form-control:focus {
+        background-color: #2c2c2c;
+        color: #fff;
+        border-color: #666;
+        box-shadow: none;
+    }
+    .form-label {
+        color: #ccc;
+    }
+</style>
+
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
       <div class="card shadow-lg border-0 rounded-4 p-4">
-        <h2 class="text-center text-primary mb-4">Забронировать столик</h2>
+        <h2 class="text-center text-light mb-4">Забронировать столик</h2>
 
         <form method="post" action="" class="row g-3">
           {% csrf_token %}
