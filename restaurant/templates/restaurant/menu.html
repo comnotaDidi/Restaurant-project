@@ -14,7 +14,7 @@
   .menu-section-title {
       font-size: 2rem;
       font-weight: bold;
-      color:rgb(255, 255, 255);
+      color: #fff;
       margin: 40px 0 20px;
       text-align: center;
   }
@@ -34,16 +34,10 @@
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
   }
 
-  .menu-item img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-bottom: 15px;
-  }
-
   .menu-item h5 {
       font-size: 1.3rem;
       margin-bottom: 5px;
-      color:rgb(255, 255, 255);
+      color: #fff;
   }
 
   .menu-item p {
@@ -54,112 +48,84 @@
   .menu-item .price {
       font-weight: bold;
       font-size: 1.1rem;
-      color:rgb(255, 255, 255);
+      color: #fff;
   }
 
   .category-nav {
-      margin-top: 30px;
+      padding: 40px 20px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      position: sticky;
+      top: 100px;
   }
 
   .category-nav a {
-      color: rgb(255, 255, 255);
+      color: #fff;
       display: block;
-      margin: 10px 0;
+      margin: 20px 0;
       text-decoration: none;
-      font-size: 1.1rem;
       position: relative;
       transition: transform 0.2s ease, color 0.2s ease;
   }
 
   .category-nav a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    width: 0%;
-    height: 2px;
-    background-color: #fff;
-    transition: width 0.3s ease;
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0%;
+      height: 2px;
+      background-color: #fff;
+      transition: width 0.3s ease;
   }
 
   .category-nav a:hover {
-      color: #ffffff;
       transform: scale(1.05);
+      color:rgb(255, 255, 255);
   }
 
   .category-nav a:hover::after {
-      width: 40%;
-  }
-
-  .search-box {
-      margin-bottom: 30px;
-  }
-
-  input[type="text"] {
-      background-color: #222;
-      color: #fff;
-      border: 1px solid #333;
+      width: 50%;
   }
 </style>
 
 <div class="container mt-5">
-    <h1 class="text-center text-primary mb-4">Меню</h1>
-
-    <!-- Поиск -->
-    <div class="row justify-content-center">
-        <div class="col-md-6 search-box">
-            <input type="text" class="form-control" placeholder="Поиск блюд...">
-        </div>
-    </div>
-
     <div class="row">
-        <!-- Навигация по категориям -->
+        <!-- Широкая навигационная панель -->
         <div class="col-md-3 category-nav">
-            <a href="#first">Первые блюда</a>
-            <a href="#second">Вторые блюда</a>
-            <a href="#dessert">Десерты</a>
-            <a href="#cocktail">Коктейли</a>
+            <a href="#food">Блюда</a>
+            <a href="#desserts">Десерты</a>
+            <a href="#cocktails">Коктейли</a>
         </div>
 
-        <!-- Список блюд -->
         <div class="col-md-9">
-            <h2 id="first" class="menu-section-title">Первые блюда</h2>
-            {% for dish in first_dishes %}
+            <!-- FOOD -->
+            <h2 id="food" class="menu-section-title">Блюда</h2>
+            {% for name, desc, price in food %}
             <div class="menu-item">
-                <img src="{{ dish.image.url }}" alt="{{ dish.name }}">
-                <h5>{{ dish.name }}</h5>
-                <p>{{ dish.description }}</p>
-                <p class="price">{{ dish.price }} ₽</p>
+                <h5>{{ name }}</h5>
+                <p>{{ desc }}</p>
+                <p class="price">{{ price }}</p>
             </div>
             {% endfor %}
 
-            <h2 id="second" class="menu-section-title">Вторые блюда</h2>
-            {% for dish in second_dishes %}
+            <!-- DESSERTS -->
+            <h2 id="desserts" class="menu-section-title">Десерты</h2>
+            {% for name, desc, price in desserts %}
             <div class="menu-item">
-                <img src="{{ dish.image.url }}" alt="{{ dish.name }}">
-                <h5>{{ dish.name }}</h5>
-                <p>{{ dish.description }}</p>
-                <p class="price">{{ dish.price }} ₽</p>
+                <h5>{{ name }}</h5>
+                <p>{{ desc }}</p>
+                <p class="price">{{ price }}</p>
             </div>
             {% endfor %}
 
-            <h2 id="dessert" class="menu-section-title">Десерты</h2>
-            {% for dish in desserts %}
+            <!-- COCKTAILS -->
+            <h2 id="cocktails" class="menu-section-title">Коктейли</h2>
+            {% for name, desc, price in cocktails %}
             <div class="menu-item">
-                <img src="{{ dish.image.url }}" alt="{{ dish.name }}">
-                <h5>{{ dish.name }}</h5>
-                <p>{{ dish.description }}</p>
-                <p class="price">{{ dish.price }} ₽</p>
-            </div>
-            {% endfor %}
-
-            <h2 id="cocktail" class="menu-section-title">Коктейли</h2>
-            {% for dish in cocktails %}
-            <div class="menu-item">
-                <img src="{{ dish.image.url }}" alt="{{ dish.name }}">
-                <h5>{{ dish.name }}</h5>
-                <p>{{ dish.description }}</p>
-                <p class="price">{{ dish.price }} ₽</p>
+                <h5>{{ name }}</h5>
+                <p>{{ desc }}</p>
+                <p class="price">{{ price }}</p>
             </div>
             {% endfor %}
         </div>

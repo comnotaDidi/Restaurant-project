@@ -1,9 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Спасибо!</title>
-</head>
-<body>
-    <h1>Спасибо за ваш отзыв!</h1>
-</body>
-</html>
+{% extends "restaurant/base.html" %}
+
+{% block title %}Спасибо{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5 pt-5">
+    <div class="alert alert-success shadow-lg rounded p-4">
+        <h2 class="mb-3">Спасибо за ваш отзыв!</h2>
+        <p>Нам очень важно ваше мнение ❤️</p>
+        <a href="{% url 'home' %}" class="btn btn-outline-light mt-3">Вернуться на главную</a>
+    </div>
+</div>
+{% endblock %}

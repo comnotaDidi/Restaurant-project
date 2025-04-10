@@ -13,4 +13,7 @@ class ReservationForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['rating', 'text']
+        fields = ['name', 'email', 'message', 'rating']
+        widgets = {
+            'rating': forms.RadioSelect
+        }
