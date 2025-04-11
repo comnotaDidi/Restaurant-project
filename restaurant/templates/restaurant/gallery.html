@@ -2,54 +2,81 @@
 {% load static %}
 
 {% block title %}Галерея{% endblock %}
-<header class="bg-primary p-3">
 
+<header class="bg-primary p-3">
 {% block content %}
 
 <!-- Подключаем внешний CSS -->
 <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
 
+<!-- Добавляем стили для эффекта увеличения при наведении -->
+<style>
+  .card-img-top {
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover .card-img-top {
+    transform: scale(1.05);
+  }
+</style>
+
 <div class="container py-5">
   <h2 class="text-center text-white mb-5">Наша Галерея</h2>
   
   <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
-
     <div class="col fade-in-up fade-delay-1">
       <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
-        <img src="{% static 'image/2.jpg' %}" class="card-img-top img-fluid" alt="Фото 1" style="height: 300px; object-fit: cover;">
+        <img src="{% static 'image/100.jpg' %}" class="card-img-top img-fluid" alt="Фото 1" style="height: 300px; object-fit: cover;">
       </div>
     </div>
 
     <div class="col fade-in-up fade-delay-2">
       <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
-        <img src="{% static 'image/1.jpg' %}" class="card-img-top img-fluid" alt="Фото 2" style="height: 300px; object-fit: cover;">
+        <img src="{% static 'image/101.jpg' %}" class="card-img-top img-fluid" alt="Фото 2" style="height: 300px; object-fit: cover;">
       </div>
     </div>
 
     <div class="col fade-in-up fade-delay-3">
       <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
-        <img src="{% static 'image/2.jpg' %}" class="card-img-top img-fluid" alt="Фото 3" style="height: 300px; object-fit: cover;">
+        <img src="{% static 'image/103.jpg' %}" class="card-img-top img-fluid" alt="Фото 3" style="height: 300px; object-fit: cover;">
       </div>
     </div>
 
     <div class="col fade-in-up fade-delay-1">
       <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
-        <img src="{% static 'image/2.jpg' %}" class="card-img-top img-fluid" alt="Фото 1" style="height: 300px; object-fit: cover;">
+        <img src="{% static 'image/104.jpg' %}" class="card-img-top img-fluid" alt="Фото 1" style="height: 300px; object-fit: cover;">
       </div>
     </div>
 
     <div class="col fade-in-up fade-delay-2">
       <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
-        <img src="{% static 'image/1.jpg' %}" class="card-img-top img-fluid" alt="Фото 2" style="height: 300px; object-fit: cover;">
+        <img src="{% static 'image/105.jpg' %}" class="card-img-top img-fluid" alt="Фото 2" style="height: 300px; object-fit: cover;">
       </div>
     </div>
 
     <div class="col fade-in-up fade-delay-3">
       <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
-        <img src="{% static 'image/2.jpg' %}" class="card-img-top img-fluid" alt="Фото 3" style="height: 300px; object-fit: cover;">
+        <img src="{% static 'image/106.jpg' %}" class="card-img-top img-fluid" alt="Фото 3" style="height: 300px; object-fit: cover;">
       </div>
     </div>
 
+    <div class="col fade-in-up fade-delay-3">
+      <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
+        <img src="{% static 'image/5.avif' %}" class="card-img-top img-fluid" alt="Фото 3" style="height: 300px; object-fit: cover;">
+      </div>
+    </div>
+
+    <div class="col fade-in-up fade-delay-3">
+      <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
+        <img src="{% static 'image/107.jpg' %}" class="card-img-top img-fluid" alt="Фото 3" style="height: 300px; object-fit: cover;">
+      </div>
+    </div>
+
+    <div class="col fade-in-up fade-delay-3">
+      <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
+        <img src="{% static 'image/108.jpg' %}" class="card-img-top img-fluid" alt="Фото 3" style="height: 300px; object-fit: cover;">
+      </div>
+    </div>
   </div>
 </div>
 
