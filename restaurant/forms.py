@@ -1,6 +1,8 @@
 from django import forms
 from .models import Reservation
 from .models import Review 
+from .models import User
+from django.contrib.auth.forms import UserCreationForm
 
 class ReservationForm(forms.ModelForm):
     class Meta:
@@ -17,3 +19,32 @@ class ReviewForm(forms.ModelForm):
         widgets = {
             'rating': forms.RadioSelect
         }
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=100, label="Логин")
+    password = forms.CharField(widget=forms.PasswordInput, label="Пароль")
+
+class RegistrationForm(UserCreationForm):
+    # Добавляем дополнительные поля для регистрации
+    first_name = forms.CharField(max_length=100, label='Имя')
+    last_name = forms.CharField(max_length=100, label='Фамилия')
+    birth_date = forms.DateField(widget=forms.SelectDateWidget(years=range(1900, 2025)), label='Дата рождения')
+    email = forms.EmailField(max_length=100, label='Электронная почта')
+
+    # Мета-информация о модели и полях
+    class Meta:
+        model = User  # Используем стандартную модель User
+        fields = ['first_name', 'last_name', 'birth_date', 'email', 'username', 'password1', 'password2']
+
+    # Переопределяем метод для проверки паролей
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password1")
+        confirm_password = cleaned_data.get("password2")
+
+        # Если пароли не совпадают, возвращаем ошибку
+        if password != confirm_password:
+            raise forms.ValidationError("Пароли не совпадают")
+
+        return cleaned_data

@@ -42,8 +42,18 @@ INSTALLED_APPS = [
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "restaurant/templates"],
-        'APP_DIRS': True,
+        'DIRS': [
+            BASE_DIR / 'templates',  # Папка с шаблонами в корне проекта
+        ],
+        'APP_DIRS': True,  # Позволяет Django искать шаблоны в папках каждого приложения
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
     },
 ]
 STATIC_URL = 'static/'
@@ -78,6 +88,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'restaurant_project.wsgi.application'
+CSRF_COOKIE_NAME = "csrftoken"
+
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
+LOGIN_URL = '/login/'
+
 
 
 # Database

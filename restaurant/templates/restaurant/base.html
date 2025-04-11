@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panorama Sky Bar</title>
 
-    <!-- Bootstrap -->
+    <!-- Подключаем Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
-    <!-- Custom CSS -->
+    <!-- Подключаем кастомный CSS -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
@@ -94,21 +94,99 @@
             margin-top: auto;
         }
 
-        /* Кнопка отправки */
+        /* Общие стили для кнопок */
         button, .btn {
             background-color: #007bff;
             color: #fff;
             border: none;
+            padding: 6px 12px; /* Уменьшение размера кнопок */
+            font-size: 0.9rem; /* Уменьшение размера шрифта */
         }
 
         button:hover, .btn:hover {
             background-color: #0056b3;
         }
+
+        /* Стили для кнопки "Logout" */
+        .navbar .nav-item .nav-link.btn-login {
+            color: #a1786e; /* Цвет текста кнопки */
+            border: 2px solid transparent;
+            border-radius: 50px;
+            padding: 6px 15px; /* Уменьшаем размер кнопки */
+            font-size: 0.8rem; /* Уменьшаем размер текста */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            
+        }
+
+        /* Эффект при наведении на кнопку */
+        .navbar .nav-item .nav-link.btn-login:hover {
+            color: #fff; /* Цвет текста меняется на белый */
+            background-color: transparent; /* Фон остаётся прозрачным */
+            border-color: rgba(161, 120, 110, 0.5); /* Тусклая обводка */
+            box-shadow: 0 0 10px rgba(161, 120, 110, 0.3); /* Лёгкая тень */
+        }
+
+        /* Дополнительный стиль для кнопки "Выйти" в выпадающем меню */
+        .navbar .dropdown-menu .btn-login {
+            color: #a1786e; /* Цвет текста */
+            padding: 2px 8px; /* Уменьшаем отступы */
+            font-size: 0.6rem; /* Еще уменьшаем размер текста */
+            border-radius: 50px;
+            font-weight: 500;
+            text-align: center;
+            text-transform: uppercase;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            background-color: transparent;
+        }
+
+        .navbar .dropdown-menu .btn-login:hover {
+            color: #fff;
+            background-color: transparent;
+            border-color: rgba(161, 120, 110, 0.5);
+            box-shadow: 0 0 10px rgba(161, 120, 110, 0.3);
+        }
+
+        /* Черный фон для выпадающего меню */
+        .navbar .dropdown-menu {
+            background-color: #000;
+            border: 1px solid #a1786e; /* Золотистая рамка вокруг меню */
+            min-width: 100px; /* Уменьшаем ширину меню */
+            height: 0; /* Меню изначально скрыто */
+            overflow: hidden;
+            padding: 0;
+            opacity: 0;
+            transition: all 0.5s ease-in-out; /* Плавная анимация */
+        }
+
+        /* Показываем выпадающее меню при наведении */
+        .navbar .nav-item.dropdown:hover .dropdown-menu {
+            height: auto; /* Меню раскрывается */
+            opacity: 1; /* Меню становится видимым */
+            padding: 3px 0; /* Добавляем отступы */
+        }
+
+        /* Стиль для элементов меню в выпадающем списке */
+        .navbar .dropdown-menu .dropdown-item {
+            color: #fff; /* Белый цвет для текста */
+            font-weight: 500;
+            padding: 4px 10px; /* Меньше отступы */
+            text-transform: uppercase;
+        }
+
+        /* Эффект при наведении на элементы выпадающего меню */
+        .navbar .dropdown-menu .dropdown-item:hover {
+            background-color: rgba(161, 120, 110, 0.5);
+            color: #fff;
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">Panorama Sky Bar</a>
@@ -122,6 +200,28 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'reservation' %}">Reservation</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'menu' %}">Menu</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'submit_review' %}">Review</a></li>
+
+                    <!-- Проверка, если пользователь авторизован -->
+                    {% if user.is_authenticated %}
+                        <!-- Dropdown для авторизованных пользователей -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link btn-login dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ user.username }}
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <!-- Форма для выхода (метод POST) -->
+                                <form method="POST" action="{% url 'logout' %}">
+                                    {% csrf_token %}
+                                    <li><button type="submit" class="dropdown-item btn-login">Logout</button></li>
+                                </form>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <!-- Кнопка для неавторизованных пользователей -->
+                        <li class="nav-item">
+                            <a class="nav-link btn-login" href="{% url 'login' %}">Login</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -135,10 +235,10 @@
 
     <!-- Футер -->
     <footer>
-        <p>© 2025 Panorama Sky Bar. Все права защищены.</p>
+        <p>© 2025 Panorama Sky Bar. All rights reserved.</p>
     </footer>
 
-    <!-- Bootstrap JS -->
+    <!-- Подключаем Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
