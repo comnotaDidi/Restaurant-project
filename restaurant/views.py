@@ -5,11 +5,11 @@ from django.contrib import messages
 from django.urls import reverse
 from .forms import ReservationForm, ReviewForm, LoginForm, RegistrationForm
 
-# Главная страница
+# Home Page
 def home(request):
     return render(request, 'restaurant/home.html')
 
-# Меню
+# Menu
 def menu(request):
     food = [
         ("Kawior Antonius", "kawior Antonius, crème fraîche, bliny, złoto", "350 PLN"),
@@ -59,19 +59,19 @@ def menu(request):
         'cocktails': cocktails,
     })
 
-# Гостевая книга
+# Guestbook
 def gallery(request):
     return render(request, 'restaurant/gallery.html')
 
-# Контакты
+# Contacts
 def contacts(request):
     return render(request, 'restaurant/contacts.html')
 
-# Бронирование
+# Reservations
 def reservation(request):
     return render(request, 'restaurant/reservation.html')
 
-# Форма бронирования
+# Booking form
 def reserve_table(request):
     if request.method == 'POST':
         form = ReservationForm(request.POST)
@@ -82,7 +82,7 @@ def reserve_table(request):
         form = ReservationForm()
     return render(request, 'restaurant/reservation.html', {'form': form})
 
-# Отправка отзыва
+# Sending feedback
 def submit_review(request):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -93,20 +93,20 @@ def submit_review(request):
         form = ReviewForm()
     return render(request, 'restaurant/review_form.html', {'form': form})
 
-# Логин и логаут с кастомными представлениями
+# Login and logout with custom views
 from django.contrib.auth.views import LoginView, LogoutView
 
 class CustomLoginView(LoginView):
-    template_name = 'restaurant/login.html'  # Указан правильный путь к шаблону
+    template_name = 'restaurant/login.html'  # The correct path to the template is specified
     authentication_form = AuthenticationForm
 
     def get_success_url(self):
-        return reverse('home')  # Редирект на главную страницу после успешного входа
+        return reverse('home')  # Redirect to home page after successful login
 
 class CustomLogoutView(LogoutView):
-    next_page = 'login'  # Страница, куда будет перенаправляться после выхода
+    next_page = 'login'  # Page to be redirected to after exit
 
-# Логин
+
 def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -116,7 +116,7 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')  # Перенаправление на главную страницу
+                return redirect('home')
             else:
                 messages.error(request, "Такого пользователя не существует.")
     else:
@@ -124,14 +124,14 @@ def login_view(request):
 
     return render(request, 'restaurant/login.html', {'form': form})
 
-# Регистрация
+
 def registration_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()  # Сохраняем пользователя
+            form.save()
             messages.success(request, 'Регистрация прошла успешно! Теперь вы можете войти.')
-            return redirect('login')  # Перенаправляем на страницу логина после успешной регистрации
+            return redirect('login')
         else:
             messages.error(request, "Ошибка регистрации. Пожалуйста, попробуйте еще раз.")
     else:
@@ -140,5 +140,5 @@ def registration_view(request):
     return render(request, 'restaurant/registration.html', {'form': form})
 
 def profile(request):
-    # Логика для страницы профиля
+
     return render(request, 'profile.html')

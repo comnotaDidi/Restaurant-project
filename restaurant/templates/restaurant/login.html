@@ -33,24 +33,24 @@
         <form method="post" action="" class="row g-3">
           {% csrf_token %}
           
-          <!-- Логин -->
+          <!-- Login -->
           <div class="col-12">
             <label for="username" class="form-label">Логин</label>
             <input type="text" class="form-control" id="username" name="username" required>
           </div>
 
-          <!-- Пароль -->
+          <!-- Password -->
           <div class="col-12">
             <label for="password" class="form-label">Пароль</label>
             <input type="password" class="form-control" id="password" name="password" required>
           </div>
 
-          <!-- Кнопка Входа -->
+          <!-- Entry Button -->
           <div class="col-12 text-center mt-3">
             <button type="submit" class="btn btn-primary px-5 py-2 shadow-sm">Войти</button>
           </div>
 
-          <!-- Ссылка на регистрацию -->
+          <!-- Registration Link -->
           <div class="col-12 text-center mt-3">
             <p>Нет аккаунта? <a href="{% url 'registration' %}" class="text-light">Зарегистрироваться</a></p>
           </div>

@@ -61,7 +61,7 @@
             transform: scale(1.05);
         }
 
-        /* Темные поля ввода */
+        /* Dark input fields */
         input[type="text"],
         input[type="email"],
         textarea {
@@ -92,7 +92,7 @@
             margin-top: auto;
         }
 
-        /* Общие стили для кнопок */
+        /* General styles for buttons */
         button, .btn {
             background-color: #007bff;
             color: #fff;
@@ -105,7 +105,7 @@
             background-color: #0056b3;
         }
 
-        /* Стили для кнопки "Logout" */
+        /* Styles for the “Logout” button */
         .navbar .nav-item .nav-link.btn-login {
             color: #a1786e;
             border: 2px solid transparent;
@@ -119,7 +119,7 @@
             
         }
 
-        /* Эффект при наведении на кнопку */
+        /* Effect when hovering over the button */
         .navbar .nav-item .nav-link.btn-login:hover {
             color: #fff;
             background-color: transparent;
@@ -127,7 +127,7 @@
             box-shadow: 0 0 10px rgba(161, 120, 110, 0.3);
         }
 
-        /* Дополнительный стиль для кнопки "Выйти" в выпадающем меню */
+        /* Additional style for the “Exit” button in the drop-down menu */
         .navbar .dropdown-menu .btn-login {
             color: #a1786e;
             padding: 2px 8px;
@@ -148,7 +148,7 @@
             box-shadow: 0 0 10px rgba(161, 120, 110, 0.3);
         }
 
-        /* Черный фон для выпадающего меню */
+        /* Black background for the drop-down menu */
         .navbar .dropdown-menu {
             background-color: #000;
             border: 1px solid #a1786e;
@@ -160,14 +160,14 @@
             transition: all 0.5s ease-in-out;
         }
 
-        /* Показываем выпадающее меню при наведении */
+        /* Show drop-down menu on hover */
         .navbar .nav-item.dropdown:hover .dropdown-menu {
             height: auto;
             opacity: 1;
             padding: 3px 0;
         }
 
-        /* Стиль для элементов меню в выпадающем списке */
+        /* Style for menu items in the drop-down list */
         .navbar .dropdown-menu .dropdown-item {
             color: #fff;
             font-weight: 500;
@@ -175,7 +175,7 @@
             text-transform: uppercase;
         }
 
-        /* Эффект при наведении на элементы выпадающего меню */
+        /* Effect when hovering over drop-down menu items */
         .navbar .dropdown-menu .dropdown-item:hover {
             background-color: rgba(161, 120, 110, 0.5);
             color: #fff;
@@ -199,7 +199,7 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'menu' %}">Menu</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'submit_review' %}">Review</a></li>
 
-                    <!-- Проверка, если пользователь авторизован -->
+                    <!-- Checking if the user is authorized -->
                     {% if user.is_authenticated %}
                         <li class="nav-item dropdown">
                             <a class="nav-link btn-login dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -213,7 +213,7 @@
                             </ul>
                         </li>
                     {% else %}
-                        <!-- Кнопка для неавторизованных пользователей -->
+                        <!-- Button for unauthorized users -->
                         <li class="nav-item">
                             <a class="nav-link btn-login" href="{% url 'login' %}">Login</a>
                         </li>
@@ -223,7 +223,7 @@
         </div>
     </nav>
 
-    <!-- Контент страницы -->
+    <!-- Page Content -->
     <main class="container mt-5 pt-5">
         {% block content %}
         {% endblock %}

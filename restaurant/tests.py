@@ -17,7 +17,7 @@ class ReservationModelTest(TestCase):
 
 class GalleryViewTest(TestCase):
     def test_gallery_page(self):
-        response = self.client.get(reverse('gallery'))  # Убедись, что в urls.py используется имя 'gallery'
+        response = self.client.get(reverse('gallery'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'restaurant/gallery.html')
 

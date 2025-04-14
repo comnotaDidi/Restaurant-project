@@ -5,31 +5,31 @@ from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('', views.home, name='home'),  # Главная страница
+    path('', views.home, name='home'),  # Home Page
 
-    # Страница меню
+    # Menu page
     path('menu/', views.menu, name='menu'),
 
-    # Гостевая книга
+    # Guestbook
     path('gallery/', views.gallery, name='gallery'),
 
-    # Контакты
+    # Contacts
     path('contacts/', views.contacts, name='contacts'),
 
-    # Бронирование
+    # Reservations
     path('reservation/', views.reserve_table, name='reservation'),
 
-    # Отправка отзыва
+    # Sending feedback
     path('submit-review/', views.submit_review, name='submit_review'),
 
-    # Страница логина с кастомным представлением
-    path('login/', CustomLoginView.as_view(), name='login'),  # Логин с кастомным представлением
+    # Login page with custom view
+    path('login/', CustomLoginView.as_view(), name='login'),  # Login with custom representation
 
-    # Страница выхода
+    # Exit page
     path('logout/', CustomLogoutView.as_view(), name='logout'),  # Выход
 
-    # Страница регистрации
-    path('registration/', views.registration_view, name='registration'),  # Регистрация
+    # Registration page
+    path('registration/', views.registration_view, name='registration'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('profile/', views.profile, name='profile'),
