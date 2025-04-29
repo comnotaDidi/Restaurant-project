@@ -39,24 +39,22 @@ class Review(models.Model):
         return f"{self.name} - {self.rating}★"
 
 class User(AbstractUser):
-    # Дата рождения, email и фамилия
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     birth_date = models.DateField()
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
 
-    # Добавляем related_name для избежания конфликта
     groups = models.ManyToManyField(
         'auth.Group',
-        related_name='restaurant_user_set',  # Измените это название на уникальное
+        related_name='restaurant_user_set',
         blank=True,
         help_text='The groups this user belongs to.',
         related_query_name='user',
     )
     user_permissions = models.ManyToManyField(
         'auth.Permission',
-        related_name='restaurant_user_permissions_set',  # Уникальное название
+        related_name='restaurant_user_permissions_set',
         blank=True,
         help_text='Specific permissions for this user.',
         related_query_name='user',

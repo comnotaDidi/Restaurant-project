@@ -26,7 +26,7 @@ urlpatterns = [
     path('login/', CustomLoginView.as_view(), name='login'),  # Login with custom representation
 
     # Exit page
-    path('logout/', CustomLogoutView.as_view(), name='logout'),  # Выход
+    path('logout/', CustomLogoutView.as_view(), name='logout'),
 
     # Registration page
     path('registration/', views.registration_view, name='registration'),

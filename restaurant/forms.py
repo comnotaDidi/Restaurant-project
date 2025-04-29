@@ -26,24 +26,20 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput, label="Пароль")
 
 class RegistrationForm(UserCreationForm):
-    # Добавляем дополнительные поля для регистрации
     first_name = forms.CharField(max_length=100, label='Имя')
     last_name = forms.CharField(max_length=100, label='Фамилия')
     birth_date = forms.DateField(widget=forms.SelectDateWidget(years=range(1900, 2025)), label='Дата рождения')
     email = forms.EmailField(max_length=100, label='Электронная почта')
 
-    # Мета-информация о модели и полях
     class Meta:
-        model = User  # Используем стандартную модель User
+        model = User
         fields = ['first_name', 'last_name', 'birth_date', 'email', 'username', 'password1', 'password2']
 
-    # Переопределяем метод для проверки паролей
     def clean(self):
         cleaned_data = super().clean()
         password = cleaned_data.get("password1")
         confirm_password = cleaned_data.get("password2")
 
-        # Если пароли не совпадают, возвращаем ошибку
         if password != confirm_password:
             raise forms.ValidationError("Пароли не совпадают")
 
