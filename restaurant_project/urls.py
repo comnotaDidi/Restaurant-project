@@ -16,14 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from restaurant import views
-from django.contrib import admin
-from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('restaurant.urls')),
-    path("reservation/", views.reservation, name="reservation"),
-    path("gallery/", views.gallery, name="gallery"),
-
+    path('', include('restaurant.urls')),  # Все маршруты берутся из restaurant/urls.py
 ]
+
