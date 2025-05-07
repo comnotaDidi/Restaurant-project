@@ -1,27 +1,15 @@
-from django.shortcuts import redirect
-from django.views.generic import TemplateView, FormView
-from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib import messages
-from django.urls import reverse_lazy
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_protect
-
-from .forms import ReservationForm, ReviewForm, LoginForm
-from .models import MenuItem
-
-# Главная страница
+# Home page
 class HomeView(TemplateView):
     template_name = 'restaurant/home.html'
 
-# Страница меню — теперь загружает данные из базы
+# Menu page — now loads data from the database
 class MenuView(TemplateView):
     template_name = 'restaurant/menu.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Используем filter вместо get, чтобы избежать ошибки DoesNotExist
+        # Use filter instead of get to avoid DoesNotExist error
         food_category = MenuItem.objects.filter(category__name='food')
         dessert_category = MenuItem.objects.filter(category__name='dessert')
         cocktail_category = MenuItem.objects.filter(category__name='cocktail')
@@ -32,19 +20,19 @@ class MenuView(TemplateView):
         
         return context
 
-# Галерея
+# Gallery
 class GalleryView(TemplateView):
     template_name = 'restaurant/gallery.html'
 
-# Контакты
+# Contacts
 class ContactsView(TemplateView):
     template_name = 'restaurant/contacts.html'
 
-# Страница бронирования
+# Reservation page
 class ReservationPageView(TemplateView):
     template_name = 'restaurant/reservation.html'
 
-# Отправка формы бронирования
+# Reservation form submission
 class ReserveTableView(FormView):
     template_name = 'restaurant/reservation.html'
     form_class = ReservationForm
@@ -54,7 +42,7 @@ class ReserveTableView(FormView):
         form.save()
         return super().form_valid(form)
 
-# Отправка отзыва
+# Review submission
 class SubmitReviewView(FormView):
     template_name = 'restaurant/review_form.html'
     form_class = ReviewForm
@@ -64,20 +52,20 @@ class SubmitReviewView(FormView):
         form.save()
         return super().form_valid(form)
 
-# Страница благодарности за отзыв
+# Thank you page for review
 class ReviewThanksView(TemplateView):
     template_name = 'restaurant/review_thanks.html'
 
-# Вход
+# Login
 class CustomLoginView(LoginView):
     template_name = 'restaurant/login.html'
     authentication_form = AuthenticationForm
 
-# Выход
+# Logout
 class CustomLogoutView(LogoutView):
     next_page = reverse_lazy('login')
 
-# Регистрация
+# Registration
 @method_decorator(csrf_protect, name='dispatch')
 class RegistrationView(FormView):
     template_name = 'restaurant/registration.html'
@@ -86,13 +74,13 @@ class RegistrationView(FormView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, 'Регистрация прошла успешно! Теперь вы можете войти.')
+        messages.success(self.request, 'Registration successful! You can now log in.')
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, "Ошибка регистрации. Пожалуйста, попробуйте еще раз.")
+        messages.error(self.request, "Registration error. Please try again.")
         return super().form_invalid(form)
 
-# Профиль пользователя
+# User profile
 class ProfileView(TemplateView):
     template_name = 'profile.html'

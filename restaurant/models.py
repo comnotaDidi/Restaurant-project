@@ -66,7 +66,7 @@ class User(AbstractUser):
         return f"{self.first_name} {self.last_name}"
 
 
-# Добавляем модель MenuItem
+# Add the MenuItem model
 class MenuItem(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
