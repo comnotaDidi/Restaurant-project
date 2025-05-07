@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Получаем секретный ключ из переменных окружения
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+SECRET_KEY = 'django-insecure-1234567890abcdefghijklmnopqrstuvwxyz'
 if not SECRET_KEY:
     raise Exception("SECRET_KEY environment variable not set")
 

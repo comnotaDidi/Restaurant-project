@@ -99,33 +99,40 @@
         </div>
 
         <div class="col-md-9">
+            <!-- FOOD SECTION -->
             <h2 id="food" class="menu-section-title">Блюда</h2>
-            {% for name, desc, price in food %}
+            {% for item in food %}
             <div class="menu-item">
-                <h5>{{ name }}</h5>
-                <p>{{ desc }}</p>
-                <p class="price">{{ price }}</p>
+                <h5>{{ item.name }}</h5>
+                <p>{{ item.description }}</p>
+                <p class="price">{{ item.price }}</p>
             </div>
+            {% empty %}
+            <p>Нет блюд в меню.</p>
             {% endfor %}
 
-            <!-- DESSERTS -->
+            <!-- DESSERTS SECTION -->
             <h2 id="desserts" class="menu-section-title">Десерты</h2>
-            {% for name, desc, price in desserts %}
+            {% for item in desserts %}
             <div class="menu-item">
-                <h5>{{ name }}</h5>
-                <p>{{ desc }}</p>
-                <p class="price">{{ price }}</p>
+                <h5>{{ item.name }}</h5>
+                <p>{{ item.description }}</p>
+                <p class="price">{{ item.price }}</p>
             </div>
+            {% empty %}
+            <p>Нет десертов в меню.</p>
             {% endfor %}
 
-            <!-- COCKTAILS -->
+            <!-- COCKTAILS SECTION -->
             <h2 id="cocktails" class="menu-section-title">Коктейли</h2>
-            {% for name, desc, price in cocktails %}
+            {% for item in cocktails %}
             <div class="menu-item">
-                <h5>{{ name }}</h5>
-                <p>{{ desc }}</p>
-                <p class="price">{{ price }}</p>
+                <h5>{{ item.name }}</h5>
+                <p>{{ item.description }}</p>
+                <p class="price">{{ item.price }}</p>
             </div>
+            {% empty %}
+            <p>Нет коктейлей в меню.</p>
             {% endfor %}
         </div>
     </div>
